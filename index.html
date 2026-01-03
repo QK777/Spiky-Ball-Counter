@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sky:Children of Licht. Spiky ball Counter</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+    <h1 class="title">
+      <span class="title-main">Sky: Children of the Light</span>
+      <span class="title-sub">Spiky Ball Counter</span>
+    </h1>
+      <p class="sub">
+       ウニ焼きでS/M/Lサイズがそれぞれいくつ取れたかを確認するためのカウンターです。<br>
+      </p>
+    </header>
+
+    <!-- 入力パネル -->
+    <section class="panel">
+      <h2>入力（未確定メモ：最大10セット）</h2>
+
+      <div class="btnRow">
+        <button class="sizeBtn" data-size="S">S<span class="hint">+5</span></button>
+        <button class="sizeBtn" data-size="M">M<span class="hint">+10</span></button>
+        <button class="sizeBtn" data-size="L">L<span class="hint">+15</span></button>
+      </div>
+
+      <div class="pendingTop">
+        <div class="pendingInfo">
+          <div class="pendingTitle">未確定：<b id="pendingFull">0</b>セット完了 / 10</div>
+          <div class="pendingSub">次に入力されるセット：<b id="pendingActive">1</b></div>
+        </div>
+        <button id="commitBtn" class="primary">確定して保存</button>
+      </div>
+
+      <div id="pendingList" class="pendingList"></div>
+
+      <div class="note">
+        ※ 各セット（1セット=4個）は「リセット」できます。<br>
+        ※ セット内の表示順は常に <b>S→M→L</b>（押した順は関係なし）。<br>
+        ※ 「確定して保存」は <b>4つ揃ったセットだけ</b> を集計に加算し、そのセットを未確定から消します。
+      </div>
+    </section>
+
+    <!-- 集計パネル（履歴なし） -->
+    <section class="panel">
+      <h2>集計（確定済み）</h2>
+
+      <div class="statsGrid">
+        <div class="stat">
+          <div class="label">セット数</div>
+          <div class="value" id="totalSets">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">総ウニ数</div>
+          <div class="value" id="totalUrchins">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">🔥の合計</div>
+          <div class="value" id="totalLight">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">平均（1セット）</div>
+          <div class="value" id="avgPerSet">0</div>
+        </div>
+      </div>
+
+      <div class="prob">
+        <h3>S/M/L 確率</h3>
+        <div class="probRow">
+          <div class="probItem">S: <b id="countS">0</b>（<span id="pctS">0</span>%）</div>
+          <div class="probItem">M: <b id="countM">0</b>（<span id="pctM">0</span>%）</div>
+          <div class="probItem">L: <b id="countL">0</b>（<span id="pctL">0</span>%）</div>
+        </div>
+      </div>
+
+      <div class="dangerZone">
+        <button id="resetAllBtn" class="danger">全データリセット</button>
+      </div>
+
+      <div class="note">
+        ※ リセットは「未確定メモ」と「確定済み集計」の両方を消します
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span class="muted">localStorageに自動保存されています</span>
+    </footer>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
